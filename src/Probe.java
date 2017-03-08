@@ -24,7 +24,7 @@ public class Probe {
         String[] split = input.split(",");
         String newRegion = "";
         if (split.length == 4) {
-            int sensorRegion = Integer.parseInt(split[0]);
+            Long sensorRegion = Long.parseLong(split[0]);
             double xAng = Double.parseDouble(split[1]);
             double yAng = Double.parseDouble(split[2]);
             double zAng = Double.parseDouble(split[3]);
@@ -37,12 +37,15 @@ public class Probe {
                 if (checkRegion.getRegionNum() == sensorRegion) {
                     if (xAng > checkRegion.getxAngMin() && xAng < checkRegion.getxAngMax() && yAng > checkRegion.getyAngMin() && yAng < checkRegion.getyAngMax() && zAng > checkRegion.getzAngMin() && zAng < checkRegion.getzAngMax()) {
                         newRegion = positionName;
+                    } else {
+                        newRegion = "Tissue";
                     }
                 }
             }
         } else if (input.equals("No Contact")) {
             newRegion = "No Contact"; //REGION = 6 IF NOT TOUCHING ONE OF THE 4 SENSORS
-        } else {
+        }
+        if (newRegion.equals("")) {
             newRegion = "None"; //REGION = 7 IF NOT SURE WHAT'S HAPPENING
         }
         System.out.println("NewRegion = " + newRegion);

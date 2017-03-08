@@ -19,6 +19,7 @@ class ProbeDetection {
     private static FirebaseDatabase database;
     private static HashMap<String, HashMap<String, ImagingRegion>> savedCals;
     private static PreviousCalibrationsGUI prevCalGUI;
+    private static LoginGUI loginGUI;
 
     public static void main(String[] args) {
         FirebaseOptions options;
@@ -37,6 +38,18 @@ class ProbeDetection {
         database = FirebaseDatabase.getInstance();
 
         endSession = false;
+
+        loginGUI = new LoginGUI();
+        loginGUI.create();
+
+        while (!loginGUI.getStatus()) {
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
 
         // Create a listener and controller
         MainControlGUI mainControlGUI = new MainControlGUI();
@@ -119,6 +132,22 @@ class ProbeDetection {
 
     public static void setPrevCalGUI(PreviousCalibrationsGUI prevCalGUI) {
         ProbeDetection.prevCalGUI = prevCalGUI;
+    }
+
+    public static LoginGUI getLoginGUI() {
+        return loginGUI;
+    }
+
+    public static void setLoginGUI(LoginGUI loginGUI) {
+        ProbeDetection.loginGUI = loginGUI;
+    }
+
+    public static String getUsername() {
+        return username;
+    }
+
+    public static void setUsername(String username) {
+        ProbeDetection.username = username;
     }
 }
 

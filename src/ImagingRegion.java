@@ -2,7 +2,7 @@
 import java.util.HashMap;
 
 public class ImagingRegion {
-    private int regionNum;
+    private Long regionNum;
     private double xAngMin;
     private double yAngMin;
     private double zAngMin;
@@ -10,7 +10,7 @@ public class ImagingRegion {
     private double yAngMax;
     private double zAngMax;
 
-    public ImagingRegion(int regionNum, double xAng, double yAng, double zAng) {
+    public ImagingRegion(Long regionNum, double xAng, double yAng, double zAng) {
         double angTol = 34.00001;
 
         this.regionNum = regionNum;
@@ -25,13 +25,14 @@ public class ImagingRegion {
         System.out.println("zAng: " + zAngMin + ", " + zAngMax);
     }
 
-    public ImagingRegion(HashMap<String, Double> hashMap) {
-        this.xAngMin = hashMap.get("xAngMin");
-        this.xAngMax = hashMap.get("xAngMax");
-        this.yAngMin = hashMap.get("yAngMin");
-        this.yAngMax = hashMap.get("yAngMax");
-        this.zAngMin = hashMap.get("zAngMin");
-        this.zAngMax = hashMap.get("zAngMax");
+    public ImagingRegion(HashMap<String, Number> hashMap) {
+        this.xAngMin = (Double) hashMap.get("xAngMin");
+        this.xAngMax = (Double) hashMap.get("xAngMax");
+        this.yAngMin = (Double) hashMap.get("yAngMin");
+        this.yAngMax = (Double) hashMap.get("yAngMax");
+        this.zAngMin = (Double) hashMap.get("zAngMin");
+        this.zAngMax = (Double) hashMap.get("zAngMax");
+        this.regionNum = (Long) hashMap.get("regionNum");
     }
 
 
@@ -59,7 +60,7 @@ public class ImagingRegion {
         return zAngMax;
     }
 
-    public int getRegionNum() {
+    public double getRegionNum() {
         return regionNum;
     }
 }

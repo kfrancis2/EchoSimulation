@@ -6,7 +6,7 @@ public class CalibrationGUI {
     private JPanel panel;
     private JLabel instructions;
     private static JTextField textField;
-    private String[] positionNames = {"Parasternal (Long Axis)", "Parasternal (Short Axis)", "Apical (4 Chamber)", "Subxiphoid (4 Chamber)", "Subxiphoid (Outlets)", "Suprasternal (Arch)"};
+    private String[] positionNames = {"Parasternal (Long Axis)", "Parasternal (Short Axis)", "Apical (4 Chamber)", "Apical (2 Chamber)", "Subxiphoid (4 Chamber/Outlets)", "Suprasternal (Arch)"};
 
     public CalibrationGUI() {
         frame = new JFrame("Calibration");

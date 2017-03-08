@@ -5,8 +5,7 @@ public class CalibrationListener implements ActionListener{
     private Calibration calibration;
     private CalibrationGUI calibrationGUI;
     private int calCounter;
-    private String[] positionNames = {"Parasternal (Long Axis)", "Parasternal (Short Axis)", "Apical (4 Chamber)", "Subxiphoid (4 Chamber)", "Subxiphoid (Outlets)", "Suprasternal (Arch)"};
-
+    private String[] positionCodes = {"PLA", "PSA", "A4C", "A2C","SX4", "SPA"};
 
     public CalibrationListener() {
         calibration = new Calibration();
@@ -18,8 +17,8 @@ public class CalibrationListener implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
         if (command.equals("Calibrate Position")) {
-            calibration.calibrate(positionNames[calCounter]);
-            if (calCounter < 4) {
+            calibration.calibrate(positionCodes[calCounter]);
+            if (calCounter < 5) {
                 calibrationGUI.nextImage(++calCounter);
             } else {
                 calCounter = 0;
