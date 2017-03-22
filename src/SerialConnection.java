@@ -12,7 +12,8 @@ public class SerialConnection {
             "/dev/tty.usbserial-A9007UX1", // Mac OS X
             "/dev/ttyACM0", // Raspberry Pi
             "/dev/ttyUSB0", // Linux
-            "COM6", // Windows
+            "COM3", // Windows
+            "COM6",
     };
 
     private BufferedReader input;

@@ -38,15 +38,17 @@ public class Probe {
                     if (xAng > checkRegion.getxAngMin() && xAng < checkRegion.getxAngMax() && yAng > checkRegion.getyAngMin() && yAng < checkRegion.getyAngMax() && zAng > checkRegion.getzAngMin() && zAng < checkRegion.getzAngMax()) {
                         newRegion = positionName;
                     } else {
-                        newRegion = "Tissue";
+                        newRegion = "TIS";
                     }
                 }
             }
+        } else if (input.equals("Tissue")) {
+            newRegion = "TIS";
         } else if (input.equals("No Contact")) {
-            newRegion = "No Contact"; //REGION = 6 IF NOT TOUCHING ONE OF THE 4 SENSORS
+            newRegion = "NIC";
         }
         if (newRegion.equals("")) {
-            newRegion = "None"; //REGION = 7 IF NOT SURE WHAT'S HAPPENING
+            newRegion = "None";
         }
         System.out.println("NewRegion = " + newRegion);
         sendToFirebase(newRegion);
