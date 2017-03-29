@@ -1,10 +1,15 @@
+import com.google.firebase.database.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 public class LoginListener implements ActionListener {
     private LoginGUI loginGUI;
+    boolean retrievedFromFirebase = false;
+    public HashMap<String,String> users = new HashMap<String,String>();
 
     public LoginListener() {
         loginGUI = ProbeDetection.getLoginGUI();
@@ -14,14 +19,37 @@ public class LoginListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
         if (command.equals("Log in")) {
-            //TODO: get log in info from LoginGUI; validate with Firebase? OR just take username not password;
+            //TODO: get log in info from LoginGUI; validate with Firebase? OR just take username not password
             String username = loginGUI.getUserNameInput().getText();
-            if (!username.equals("")) {
-                ProbeDetection.setUsername(username);
+            System.out.println("username: " + username);
+            FirebaseDatabase database = ProbeDetection.getDatabase();
+            DatabaseReference ref = database.getReference("Users Map");
+            ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for(DataSnapshot child: dataSnapshot.getChildren()){
+                        HashMap<String,String> emailMap = (HashMap<String,String>) child.getValue();
+                        String key = child.getKey();
+                        String email = emailMap.get("email");
+                        users.put(key,email);
+
+                    }
+                    retrievedFromFirebase = true;
+                }
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
+            while(!retrievedFromFirebase) {
+                try {
+                    TimeUnit.MILLISECONDS.sleep(1);
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+            }
+            if (users.containsValue(username)) {
                 loginGUI.setStatus(true);
                 loginGUI.close();
-            } else {
-                JOptionPane.showMessageDialog(null, "Please enter a username.");
+            } else{
+                JOptionPane.showMessageDialog(null, "User is either invalid or isn't signed into web application");
             }
         }
     }

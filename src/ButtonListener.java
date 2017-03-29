@@ -16,6 +16,8 @@ public class ButtonListener implements ActionListener {
             ProbeDetection.setPrevCalGUI(previousCalibrationsGUI);
         } else if (command.equals("End Session")) {
             MainControlGUI.close();
+        } else if (command.equals("Refresh")) {
+            MainControlGUI.refreshSavedCals();
         }
     }
 }

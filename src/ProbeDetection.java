@@ -76,6 +76,7 @@ class ProbeDetection {
     static void setCalibratedRegions(HashMap<String, ImagingRegion> calRegions) {
         calibratedRegions = calRegions;
         probe = new Probe(calRegions);
+        MainControlGUI.checkCalSet();
     }
 
     static HashMap<String, ImagingRegion> getCalibratedRegions() {

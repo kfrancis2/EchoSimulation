@@ -19,6 +19,12 @@ public class ArduinoListener implements SerialPortEventListener {
                 System.out.println(inputLine);
                 ProbeDetection.setInputLine(inputLine);
                 probe = ProbeDetection.getProbe();
+                CalibrationGUI calibrationGUI = ProbeDetection.getCalibrationGUI();
+                if (calibrationGUI != null) {
+                    if (calibrationGUI.getStatus()) {
+                        ProbeDetection.getCalibrationGUI().setCurrentPosition(inputLine);
+                    }
+                }
                 if (probe != null) {
                     probe.analyzeInput(inputLine);
                 }

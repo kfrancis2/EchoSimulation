@@ -1,6 +1,7 @@
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Enumeration;
@@ -45,6 +46,7 @@ public class SerialConnection {
         }
         if (portId == null) {
             System.out.println("Could not find COM port.");
+            JOptionPane.showMessageDialog( null,"Cannot connect to Arduino. Please restart program to try again.");
             return;
         }
 
@@ -66,10 +68,11 @@ public class SerialConnection {
             mainControlGUI.connected();
 
             // add event listeners
-            serialPort.addEventListener(new ArduinoListener(input, mainControlGUI)); //TODO: DO I NEED TO SAVE THIS LISTENER?
+            serialPort.addEventListener(new ArduinoListener(input, mainControlGUI));
             serialPort.notifyOnDataAvailable(true); //this enables one time notification on first time data is available; not sure what kind of notification?
         } catch (Exception e) {
             System.err.println(e.toString());
+            JOptionPane.showMessageDialog( null,"Cannot connect to Arduino. Please restart program to try again.");
         }
     }
 

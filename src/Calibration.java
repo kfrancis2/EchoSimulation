@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 public class Calibration {
     private HashMap<String, ImagingRegion> calibratedRegions;
     private DatabaseReference ref;
-    private String userID = "yWzgI0q39TRtvJUFhaapLFOfJAJ3";
+    private String userID;
     private FirebaseDatabase database;
     static Boolean wait;
     private String[] positionCodes = {"PLA", "PSA", "A4C", "A2C", "SX4", "SPA"};
@@ -15,6 +15,7 @@ public class Calibration {
     public Calibration() {
         calibratedRegions = new HashMap<>();
         database = ProbeDetection.getDatabase();
+        userID = ProbeDetection.getUsername();
     }
 
     public void calibrate(String positionCode) {
@@ -38,6 +39,7 @@ public class Calibration {
     public void sendToFirebase(String saveName) {
         ref = database.getReference(userID + "/SavedCalibrations/" + saveName);
         ref.setValue(calibratedRegions);
+        MainControlGUI.refreshSavedCals();
     }
 
     public HashMap<String, HashMap<String, ImagingRegion>> getCalibrationsFromFirebase() {
