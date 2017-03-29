@@ -10,10 +10,6 @@ public class ButtonListener implements ActionListener {
             CalibrationGUI calibrationGUI = new CalibrationGUI();
             ProbeDetection.setCalibrationGUI(calibrationGUI);
             calibrationGUI.create();
-        } else if (command.equals("Use Previous")) {
-            PreviousCalibrationsGUI previousCalibrationsGUI = new PreviousCalibrationsGUI();
-            previousCalibrationsGUI.create();
-            ProbeDetection.setPrevCalGUI(previousCalibrationsGUI);
         } else if (command.equals("End Session")) {
             MainControlGUI.close();
         } else if (command.equals("Refresh")) {

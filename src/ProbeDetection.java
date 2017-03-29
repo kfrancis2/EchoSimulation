@@ -18,7 +18,6 @@ class ProbeDetection {
     private static String username;
     private static FirebaseDatabase database;
     private static HashMap<String, HashMap<String, ImagingRegion>> savedCals;
-    private static PreviousCalibrationsGUI prevCalGUI;
     private static LoginGUI loginGUI;
 
     public static void main(String[] args) {
@@ -125,14 +124,6 @@ class ProbeDetection {
 
     public static void setSavedCals(HashMap<String, HashMap<String, ImagingRegion>> savedCals) {
         ProbeDetection.savedCals = savedCals;
-    }
-
-    public static PreviousCalibrationsGUI getPrevCalGUI() {
-        return prevCalGUI;
-    }
-
-    public static void setPrevCalGUI(PreviousCalibrationsGUI prevCalGUI) {
-        ProbeDetection.prevCalGUI = prevCalGUI;
     }
 
     public static LoginGUI getLoginGUI() {

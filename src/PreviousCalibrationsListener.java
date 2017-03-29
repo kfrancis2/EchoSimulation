@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit;
 
 public class PreviousCalibrationsListener implements ActionListener {
     private HashMap<String, HashMap<String, ImagingRegion>> savedCals;
-    private PreviousCalibrationsGUI previousCalibrationsGUI;
 
     public PreviousCalibrationsListener() {
         savedCals = ProbeDetection.getSavedCals();
