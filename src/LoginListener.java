@@ -47,6 +47,7 @@ public class LoginListener implements ActionListener {
             }
             if (users.containsValue(username)) {
                 loginGUI.setStatus(true);
+                ProbeDetection.setUsername("Q3ZSV1KWfTUHpp09yJKTftopsW22"); //TODO: SET USERNAME AS USER STRING
                 loginGUI.close();
             } else{
                 JOptionPane.showMessageDialog(null, "User is either invalid or isn't signed into web application");

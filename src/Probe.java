@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class Probe {
     private String region;
     private DatabaseReference ref;
-    private String userID = "yWzgI0q39TRtvJUFhaapLFOfJAJ3";
+    private String userID;
     private HashMap<String, ImagingRegion> calibratedRegions;
     private int zeros;
     private Boolean consecutiveZeros;
@@ -19,6 +19,8 @@ public class Probe {
         zeros = 0;
         region = "No Contact";//TODO
 
+        userID = ProbeDetection.getUsername();
+        System.out.println(userID);
         final FirebaseDatabase database = ProbeDetection.getDatabase();
         ref = database.getReference(userID + "/ProbeData");
 
@@ -50,8 +52,21 @@ public class Probe {
                 if (checkRegion.getRegionNum() == sensorRegion) {
                     if (xAng > checkRegion.getxAngMin() && xAng < checkRegion.getxAngMax() && yAng > checkRegion.getyAngMin() && yAng < checkRegion.getyAngMax() && zAng > checkRegion.getzAngMin() && zAng < checkRegion.getzAngMax()) {
                         newRegion = positionName;
+                        if (positionName.equals("A4C")) {
+                            System.out.println(xAng);
+                            System.out.println(xAng > checkRegion.getxAngMin());
+                            System.out.println(xAng < checkRegion.getxAngMax());
+                            System.out.println(yAng);
+                            System.out.println(yAng > checkRegion.getyAngMin());
+                            System.out.println(yAng < checkRegion.getyAngMax());
+                            System.out.println(zAng);
+                            System.out.println(zAng > checkRegion.getzAngMin());
+                            System.out.println(zAng < checkRegion.getzAngMax());
+                        }
                     } else {
-                        newRegion = "TIS";
+                        if (!newRegion.equals("A4C") && !newRegion.equals("PLA")) {
+                            newRegion = "TIS";
+                        }
                     }
                 }
             }
